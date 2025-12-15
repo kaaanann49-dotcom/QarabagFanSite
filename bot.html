@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Discord Bot Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="main">
+
+        <h1>🤖 Discord Bot Dashboard</h1>
+
+        <!-- MENYU -->
+        <div id="menu">
+            <button onclick="showPage('umumi')">🌐 Ümumi</button>
+            <button onclick="showPage('ayar')">⚙️ Tənzimləmə</button>
+            <button onclick="showPage('moderasiya')">🛡 Moderasiya</button>
+            <button onclick="showPage('bot')">🤖 Bot</button>
+            <button onclick="showPage('ekonomi')">💰 Ekonomi</button>
+            <button onclick="showPage('yetkili')">👤 Yetkili Alım</button>
+        </div>
+
+        <!-- SƏHİFƏLƏR -->
+        <div class="page" id="umumi">
+            <h2>🌐 Ümumi Komutlar</h2>
+            <ul>
+                <li>.öneri - Serverə təklif göndərməyinizə kömək edir.</li>
+                <li>.mc - Ümumi üzv sayını göstərir. </li>
+                <li>.sunucu-avatar - Serverin avatarını göstərir.</li>
+            </ul>
+        </div>
+
+        <div class="page" id="ayar">
+            <h2>⚙️ Tənzimlənə Bilən Komandalar</h2>
+            <ul>
+                <li>.giriş-ayar - Serverə daxil olan istifadəçilərə qarşılama mesajı göndərər.</li>
+                <li>.giriş-arka-plan - Qarşılama şəkilini yenidən ayarlayarsınız.</li>
+                <li>.çıkış-ayar - Serverdən çıxan istifadəçilərə vida mesajı göndərər.</li>
+                <li>.sistemi-sıfırla - Giriş/çıxış sistemini sıfırlayır. (Təhlükəli)</li>
+                <li>.yardım-arka-plan - Yardım menyusunun arxa plan şəklini ayarlayarsınız.</li>
+                <li>.sa-as-aç ; .sa-as-kapat - SA/AS sistemini açıb-bağlaya bilərsiniz.</li>
+                <li>.log-öneri - Təkliflərin göndəriləcəyi log kanalını ayarlayarsınız.</li>
+            </ul>
+        </div>
+
+        <div class="page" id="moderasiya">
+            <h2>🛡 Moderasiya Komandaları</h2>
+            <ul>
+                <li>.lock</li>
+                <li>.unlock</li>
+                <li>.purge - gosterilen qeder mesaj silme</li>
+                <li>.rol-ver</li>
+                <li>.rol-al</li>
+                <li>.kick</li>
+                <li>.nuke</li>
+                <li>.ban</li>
+                <li>.unban (id)</li>
+                <li>.mute</li>
+                <li>.forceban</li>
+                <li>.timeout</li>
+                <li>.emoji-ekle</li>
+                <li>.oylama</li>
+                <li>.yavaş-mod</li>
+            </ul>
+        </div>
+
+        <div class="page" id="bot">
+            <h2>🤖 Bot Komandaları</h2>
+            <ul>
+                <li>.ileti - Bot vasitəsilə yetkili ilə əlaqə qurarsınız.</li>
+                <li>.sunucu-bilgi - Server haqqında məlumat verir. </li>
+                <li>.kullanıcı-bilgi - Qeyd edilən istifadəçinin məlumatlarını göstərir. </li>
+            </ul>
+        </div>
+
+        <div class="page" id="ekonomi">
+            <h2>💰 Ekonomi Komandaları</h2>
+            <ul>
+                <li>.işlə</li>
+                <li>.günlük</li>
+                <li>.market</li>
+                <li>.envanter</li>
+                <li>.ovla</li>
+                <li>.qutu</li>
+                <li>.cf</li>
+                <li>.pulum</li>
+                <li>.kasa</li>
+                <li>.pul-gonder</li>
+                <li>.pul-qoy</li>
+                <li>.pul-cek</li>
+            </ul>
+        </div>
+
+        <div class="page" id="yetkili">
+            <h2>👤 Yetkili Alım Komandaları</h2>
+            <ul>
+                <li>.yetkili-başvuru</li>
+                <li>.yetkili-alım-log - Başvuruların göndəriləcəyi kanalı ayarlayarsınız.</li>
+                <li>.panel-yazı - Paneldə görünəcək mətni ayarlayarsınız.</li>
+                <li>.kural-yazı - Panel üçün qaydalar mətni ayarlayarsınız.</li>
+                <li>.panel-foto-ekle - Panelə şəkil əlavə edərsiniz. (İstəyə bağlı)</li>
+                <li>.panel-sıfırla - Yetkili alım panel sistemini sıfırlayarsınız.</li>
+            </ul>
+        </div>
+
+        <a href="qarabag.html" id="geri">← Ana səhifəyə qayıt</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1441203111031996589&scope=bot%20applications.commands&permissions=0"
+            id="addbot"><i data-lucide-name="arrow-right"></i> Serverimizə botu əlavə et</a>
+
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => {
+                p.style.display = "none";
+            });
+            document.getElementById(pageId).style.display = "block";
+        }
+        showPage('umumi');
+    </script>
+</body>
+
+</html>
+
+<style>
+    #addbot {
+        display: inline-block;
+        margin-top: 80px;
+        margin-left: 20px;
+        color: white;
+        text-decoration: none;
+        opacity: 0.8;
+        border: 1px solid white;
+        width: 200px;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        border-radius: 20px;
+        float: left;
+    }
+
+    #addbot:hover {
+        opacity: 1;
+    }
+
+    #geri {
+        display: inline-block;
+        margin-top: 80px;
+        color: white;
+        text-decoration: none;
+        opacity: 0.8;
+        border: 1px solid white;
+        width: 200px;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        border-radius: 20px;
+        float: left;
+    }
+
+    #geri:hover {
+        opacity: 1;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Rubik", sans-serif;
+        background: linear-gradient(90deg, #14054d, #05021a);
+        color: white;
+    }
+
+    #main {
+        width: 80%;
+        margin: 40px auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    #menu {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    #menu button {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 10px 18px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #menu button:hover {
+        scale: 1.1;
+    }
+
+    .page {
+        display: none;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 25px;
+        padding: 30px;
+    }
+
+    .page ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .page li {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 12px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+    }
+</style>
