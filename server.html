@@ -1,0 +1,165 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<div id="main">
+
+    <header>
+        <a href="qarabag.html" class="logo">
+            <img src="https://i.hizliresim.com/93m610l.png" width="36">
+        </a>
+
+        <a href="https://discord.gg/P2V6kBfc" class="server-title">
+            Discord Serverimiz
+        </a>
+
+        <a href="https://discord.gg/P2V6kBfc" class="dc-icon">
+            <img src="https://i.hizliresim.com/kzd69ni.png" width="42">
+        </a>
+    </header>
+
+    <div class="card">
+        <img src="https://i.hizliresim.com/yd8cyii.png" class="server-image">
+
+        <h2>Discord Serveri – İcmanın Ürəyi</h2>
+
+        <ul>
+            <li>Canlı oyun müzakirələri</li>
+            <li>Son xəbərlər və elanlar</li>
+            <li>Oyun gecələri və tədbirlər</li>
+            <li>Aktiv və ədalətli mühit</li>
+        </ul>
+
+        <a href="https://discord.gg/P2V6kBfc" class="join-btn">
+            Serverə Qoşul
+        </a>
+    </div>
+
+    <a href="qarabag.html" class="back-btn">⬅ Ana səhifəyə qayıt</a>
+
+</div>
+
+<style>
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    font-family: "Google Sans", sans-serif;
+}
+
+#main{
+    min-height:100vh;
+    background: linear-gradient(135deg, #1a0b6e, #05021a);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    color:white;
+}
+
+
+header{
+    width:100%;
+    padding:20px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.server-title{
+    font-size:28px;
+    font-weight:700;
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+}
+
+.server-title:hover{
+    transform:scale(1.08);
+}
+
+
+.card{
+    margin-top:40px;
+    width:420px;
+    padding:30px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,0.2);
+    text-align:center;
+    animation: fadeUp 1s ease;
+}
+
+.server-image{
+    width:220px;
+    border-radius:30px;
+    transition:0.4s;
+}
+
+.server-image:hover{
+    transform:scale(1.08);
+}
+
+.card h2{
+    margin:20px 0 15px;
+}
+
+.card ul{
+    list-style:none;
+    padding:0;
+    text-align:left;
+}
+
+.card ul li{
+    margin:10px 0;
+    font-weight:600;
+}
+
+
+.join-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 28px;
+    background: linear-gradient(135deg, #7fffd4, #5ac8fa);
+    color:#000;
+    border-radius:20px;
+    text-decoration:none;
+    font-weight:700;
+    transition:0.4s;
+}
+
+.join-btn:hover{
+    transform:scale(1.15);
+    box-shadow:0 0 20px rgba(127,255,212,0.7);
+}
+
+
+.back-btn{
+    margin-top:40px;
+    margin-bottom:30px;
+    text-decoration:none;
+    color:white;
+    padding:10px 25px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.5);
+    transition:0.4s;
+}
+
+.back-btn:hover{
+    background:rgba(255,255,255,0.2);
+}
+
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
