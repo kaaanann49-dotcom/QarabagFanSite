@@ -1,243 +1,682 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8">
-<title>Qarabağ Mini Game</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap" rel="stylesheet">
-
-<style>
-*{
-    box-sizing:border-box;
-    font-family:"Rubik", sans-serif;
-}
-
-body{
-    margin:0;
-    background:#05020f;
-    color:white;
-    overflow:hidden;
-}
-
-/* BACKGROUND GLOW */
-.bg{
-    position:fixed;
-    inset:0;
-    background:
-      radial-gradient(circle at 20% 20%, #6b4eff55, transparent 40%),
-      radial-gradient(circle at 80% 30%, #00ffd555, transparent 40%);
-    filter:blur(80px);
-    z-index:-1;
-}
-
-/* GAME UI */
-.game{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-}
-
-h1{
-    font-size:48px;
-    margin-bottom:10px;
-}
-
-.info{
-    display:flex;
-    gap:40px;
-    font-size:20px;
-    margin-bottom:30px;
-}
-
-#startBtn{
-    padding:14px 40px;
-    margin-bottom: 20px;
-    font-size:18px;
-    border:none;
-    border-radius:30px;
-    cursor:pointer;
-    background:linear-gradient(90deg,#6b4eff,#00ffd5);
-    font-weight:700;
-    transition:.3s;
-}
-
-#startBtn:hover{
-    transform:scale(1.1);
-}
-
-/* PLAY AREA */
-.play-area{
-    position:relative;
-    width:600px;
-    height:350px;
-    border-radius:30px;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,0.25);
-    overflow:hidden;
-}
-
-/* TARGET */
-#target{
-    position:absolute; 
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    background-image: url(https://cdn.imagevisit.com/2025/12/15/Gemini_Generated_Image_qine83qine83qine-removebg-preview.png);
-    
-    display:none;
-    cursor:pointer;
-    box-shadow:0 0 20px #ff0055;
-    animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.2);}
-    100%{transform:scale(1);}
-}
-
-/* GAME OVER */
-#gameOver{
-    margin-top:20px;
-    font-size:26px;
-    font-weight:700;
-    display:none;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qarabağ FK - Ən Yaxşı 11</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;900&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<div class="bg"></div>
+<div class="bg-glow"></div>
 
-<div class="game">
-    <h1>🎮 Qarabağ Reaction Challenge</h1>
+<div id="app">
+  <nav class="nav">
+    <div class="brand">
+      <img src="https://hizliresim.com/8gdfou3">
+      <span>Qarabağ FK Fan Səhifəsi</span>
+    </div>
+    <div class="links">
+      <a href="qarabag.html" onclick="window.history.back()">← Geri</a>
+    </div>
+  </nav>
 
-    <div class="info">
-        <div>⏱ Vaxt: <span id="time">20</span>s</div>
-        <div>🔥 Score: <span id="score">0</span></div>
+  <section class="hero-small">
+    <h1>Ən Yaxşı <span>11-ni Seç</span></h1>
+    <p>2003-2025: Qarabağ FK tarixindən ən sevdiyiniz oyunçuları seçərək öz ideal heyətinizi qurun</p>
+  </section>
+
+  <div class="game-container">
+    
+    <div class="field-section">
+      <div class="formation-selector">
+        <button onclick="changeFormation('4-3-3')" class="active" data-formation="4-3-3">4-3-3</button>
+        
+      </div>
+
+      <div class="field" id="field">
+        <div class="position gk" data-pos="Qapıçı" onclick="openPlayerSelect('gk')">
+          <div class="jersey">1</div>
+          <span>Qapıçı</span>
+        </div>
+        
+        <div class="defense-line">
+          <div class="position def" data-pos="Müdafiəçi" onclick="openPlayerSelect('lb')">
+            <div class="jersey">3</div>
+            <span>Sol Müd.</span>
+          </div>
+          <div class="position def" data-pos="Müdafiəçi" onclick="openPlayerSelect('cb1')">
+            <div class="jersey">4</div>
+            <span>Mərkəz Müd.</span>
+          </div>
+          <div class="position def" data-pos="Müdafiəçi" onclick="openPlayerSelect('cb2')">
+            <div class="jersey">5</div>
+            <span>Mərkəz Müd.</span>
+          </div>
+          <div class="position def" data-pos="Müdafiəçi" onclick="openPlayerSelect('rb')">
+            <div class="jersey">2</div>
+            <span>Sağ Müd.</span>
+          </div>
+        </div>
+
+        <div class="midfield-line">
+          <div class="position mid" data-pos="Yarımmüdafiəçi" onclick="openPlayerSelect('cm1')">
+            <div class="jersey">6</div>
+            <span>Mərkəz Yar.</span>
+          </div>
+          <div class="position mid" data-pos="Yarımmüdafiəçi" onclick="openPlayerSelect('cm2')">
+            <div class="jersey">8</div>
+            <span>Mərkəz Yar.</span>
+          </div>
+          <div class="position mid" data-pos="Yarımmüdafiəçi" onclick="openPlayerSelect('cm3')">
+            <div class="jersey">10</div>
+            <span>Mərkəz Yar.</span>
+          </div>
+        </div>
+
+        <div class="attack-line">
+          <div class="position att" data-pos="Hücumçu" onclick="openPlayerSelect('lw')">
+            <div class="jersey">7</div>
+            <span>Sol Cinah</span>
+          </div>
+          <div class="position att" data-pos="Hücumçu" onclick="openPlayerSelect('st')">
+            <div class="jersey">9</div>
+            <span>Hücumçu</span>
+          </div>
+          <div class="position att" data-pos="Hücumçu" onclick="openPlayerSelect('rw')">
+            <div class="jersey">11</div>
+            <span>Sağ Cinah</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-reset" onclick="resetTeam()">🔄 Sıfırla</button>
+        <button class="btn-share" onclick="shareTeam()">📤 Paylaş</button>
+      </div>
     </div>
 
-    <button id="startBtn">Oyuna Başla</button>
+    <div class="player-panel" id="playerPanel">
+      <div class="panel-header">
+        <h3>Oyunçu Seç: <span id="positionTitle">Qapıçı</span></h3>
+        <button class="close-btn" onclick="closePlayerSelect()">✕</button>
+      </div>
+      
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterByPosition('all')">Hamısı</button>
+        <button class="filter-tab" onclick="filterByPosition('gk')">Qapıçı</button>
+        <button class="filter-tab" onclick="filterByPosition('def')">Müdafiə</button>
+        <button class="filter-tab" onclick="filterByPosition('mid')">Yarımmüdafiə</button>
+        <button class="filter-tab" onclick="filterByPosition('att')">Hücum</button>
+      </div>
 
-    <div class="play-area" id="area">
-        <div id="target"> <img src="https://cdn.imagevisit.com/2025/12/15/Gemini_Generated_Image_qine83qine83qine-removebg-preview.png" width="60px"></div>
+      <input type="text" class="search-box" placeholder="🔍 Oyunçu axtar..." oninput="searchPlayers(this.value)">
+
+      <div class="players-list" id="playersList"></div>
     </div>
 
-    <div id="gameOver"></div>
+  </div>
 </div>
 
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+
+body {
+  background: #05020f;
+  color: white;
+  overflow-x: hidden;
+}
+
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, #0d024635, transparent 40%),
+    radial-gradient(circle at 80% 30%, #31036855, transparent 40%),
+    radial-gradient(circle at 50% 90%, #b8aeb155, transparent 50%);
+  z-index: -1;
+  filter: blur(80px);
+}
+
+.nav {
+  padding: 22px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.brand img {
+  width: 42px;
+}
+
+.links a {
+  margin-left: 28px;
+  text-decoration: none;
+  color: #ffffffaa;
+  font-weight: 500;
+  transition: .3s;
+}
+
+.links a:hover {
+  color: white;
+}
+
+.hero-small {
+  max-width: 900px;
+  margin: 60px auto 40px;
+  text-align: center;
+}
+
+.hero-small h1 {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.hero-small span {
+  background: linear-gradient(90deg, #6b4eff, #00ffd5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-small p {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #ffffffcc;
+}
+
+.game-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px 60px;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 30px;
+}
+
+.field-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formation-selector {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.formation-selector button {
+  padding: 12px 28px;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.06);
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.formation-selector button.active,
+.formation-selector button:hover {
+  border-color: #00ffd5;
+  background: rgba(0,255,213,0.15);
+}
+
+.field {
+  background: linear-gradient(180deg, #1a3d2e 0%, #0f2419 100%);
+  border-radius: 25px;
+  padding: 40px 30px;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.4);
+}
+
+.field::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(90deg, transparent 48%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 52%),
+    linear-gradient(0deg, transparent 0%, rgba(255,255,255,0.08) 100%);
+  border-radius: 25px;
+  pointer-events: none;
+}
+
+.position {
+  background: rgba(107, 78, 255, 0.3);
+  border: 3px solid #6b4eff;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .4s;
+  position: relative;
+  z-index: 1;
+}
+
+.position:hover {
+  transform: scale(1.15);
+  background: rgba(107, 78, 255, 0.5);
+  box-shadow: 0 0 30px rgba(107, 78, 255, 0.6);
+}
+
+.position.selected {
+  background: rgba(0, 255, 213, 0.3);
+  border-color: #00ffd5;
+}
+
+.position .jersey {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.position span {
+  font-size: 11px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.position.selected .player-name {
+  position: absolute;
+  bottom: -25px;
+  font-size: 10px;
+  white-space: nowrap;
+  background: rgba(0,0,0,0.7);
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+.defense-line, .midfield-line, .attack-line {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.btn-reset, .btn-share {
+  padding: 14px 32px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.btn-reset {
+  background: rgba(255, 78, 107, 0.2);
+  color: #ff4e6b;
+  border: 2px solid #ff4e6b;
+}
+
+.btn-reset:hover {
+  background: rgba(255, 78, 107, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-share {
+  background: linear-gradient(135deg, #6b4eff, #00ffd5);
+  color: white;
+}
+
+.btn-share:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(107, 78, 255, 0.4);
+}
+
+.player-panel {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px);
+  border-radius: 25px;
+  padding: 25px;
+  max-height: 850px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.panel-header h3 {
+  font-size: 20px;
+}
+
+.close-btn {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  transition: .3s;
+}
+
+.close-btn:hover {
+  background: rgba(255,78,107,0.3);
+  transform: rotate(90deg);
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 8px 16px;
+  border: 2px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #ffffffaa;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.filter-tab.active,
+.filter-tab:hover {
+  border-color: #00ffd5;
+  background: rgba(0,255,213,0.15);
+  color: white;
+}
+
+.search-box {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.08);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  margin-bottom: 15px;
+  transition: .3s;
+}
+
+.search-box:focus {
+  outline: none;
+  border-color: #6b4eff;
+  background: rgba(255,255,255,0.12);
+}
+
+.players-list {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.player-card {
+  background: rgba(255,255,255,0.08);
+  padding: 14px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: .3s;
+  border: 2px solid transparent;
+}
+
+.player-card:hover {
+  background: rgba(107, 78, 255, 0.2);
+  border-color: #6b4eff;
+  transform: translateX(5px);
+}
+
+.player-card .name {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.player-card .info {
+  font-size: 12px;
+  color: #ffffffaa;
+}
+
+.player-card .years {
+  font-size: 11px;
+  color: #00ffd5;
+  margin-top: 3px;
+}
+
+@media (max-width: 1200px) {
+  .game-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .player-panel {
+    max-height: 500px;
+  }
+}
+</style>
+
 <script>
-const startBtn = document.getElementById("startBtn");
-const target = document.getElementById("target");
-const area = document.getElementById("area");
-const scoreEl = document.getElementById("score");
-const timeEl = document.getElementById("time");
-const gameOver = document.getElementById("gameOver");
+const players = {
+  gk: [
+    { name: "Farhad Veliəv", years: "2003-2005", position: "gk" },
+    { name: "Kamran Əğayev", years: "2006-2014", position: "gk" },
+    { name: "Ibrahim Šehić", years: "2015-2020", position: "gk" },
+    { name: "Şahrudin Məhəmmədəliyev", years: "2020-2025", position: "gk" },
+  ],
+  def: [
+    { name: "Rəşad Sadıqov", years: "2008-2020", position: "def" },
+    { name: "Maksim Medvedev", years: "2014-2019", position: "def" },
+    { name: "Qara Qarayev", years: "2014-2022", position: "def" },
+    { name: "Badavi Hüseynov", years: "2018-2025", position: "def" },
+    { name: "Elvin Bədəlov", years: "2016-2021", position: "def" },
+    { name: "Abbas Hüseynov", years: "2018-2023", position: "def" },
+    { name: "Bahlul Mustafazadə", years: "2019-2025", position: "def" },
+    { name: "Kevin Medina", years: "2022-2025", position: "def" },
+    { name: "Julio Romao", years: "2023-2025", position: "def" },
+    { name: "Marko Vešović", years: "2017-2020", position: "def" },
+  ],
+  mid: [
+    { name: "Rəşad Sadıqov", years: "2008-2020", position: "mid" },
+    { name: "Richard Almeida", years: "2014-2019", position: "mid" },
+    { name: "Dani Quintana", years: "2015-2018", position: "mid" },
+    { name: "Qara Qarayev", years: "2014-2022", position: "mid" },
+    { name: "Elvin Məmmədov", years: "2016-2024", position: "mid" },
+    { name: "Patrick Andrade", years: "2020-2024", position: "mid" },
+    { name: "Abdellah Zoubir", years: "2017-2025", position: "mid" },
+    { name: "Nariman Axundzadə", years: "2021-2024", position: "mid" },
+    { name: "Leandro Andrade", years: "2022-2025", position: "mid" },
+    { name: "Marko Janković", years: "2022-2024", position: "mid" },
+    { name: "Yassine Benzia", years: "2022-2024", position: "mid" },
+    { name: "Toral Bayramov", years: "2022-2025", position: "mid" },
+  ],
+  att: [
+    { name: "Gurban Gurbanov", years: "2003-2008", position: "att" },
+    { name: "Branimir Subašić", years: "2013-2016", position: "att" },
+    { name: "Reynaldo", years: "2014-2017", position: "att" },
+    { name: "Dino Ndlovu", years: "2016-2019", position: "att" },
+    { name: "Mahir Madatov", years: "2017-2023", position: "att" },
+    { name: "Jaime Romero", years: "2021-2024", position: "att" },
+    { name: "Owusu Kwabena", years: "2021-2024", position: "att" },
+    { name: "Juninho", years: "2022-2025", position: "att" },
+    { name: "Olavio Juninho", years: "2023-2025", position: "att" },
+    { name: "Redon Xhixha", years: "2024-2025", position: "att" },
+    { name: "Yassine Benzia", years: "2022-2024", position: "att" },
+  ]
+};
 
-let score = 0;
-let time = 20;
-let timer;
-let playing = false;
+let selectedTeam = {};
+let currentPosition = '';
+let currentFormation = '4-3-3';
 
-function randomPosition(){
-    const maxX = area.clientWidth - 60;
-    const maxY = area.clientHeight - 60;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    target.style.left = x + "px";
-    target.style.top = y + "px";
+function openPlayerSelect(position) {
+  currentPosition = position;
+  const panel = document.getElementById('playerPanel');
+  const posTitle = document.getElementById('positionTitle');
+  
+  const posNames = {
+    gk: 'Qapıçı',
+    lb: 'Sol Müdafiəçi',
+    cb1: 'Mərkəz Müdafiəçi',
+    cb2: 'Mərkəz Müdafiəçi',
+    rb: 'Sağ Müdafiəçi',
+    cm1: 'Yarımmüdafiəçi',
+    cm2: 'Yarımmüdafiəçi',
+    cm3: 'Yarımmüdafiəçi',
+    lw: 'Sol Cinah',
+    st: 'Hücumçu',
+    rw: 'Sağ Cinah'
+  };
+  
+  posTitle.textContent = posNames[position] || 'Oyunçu';
+  
+  filterByPosition('all');
+  panel.style.display = 'flex';
 }
 
-startBtn.onclick = () => {
-    if(playing) return;
-
-    playing = true;
-    score = 0;
-    time = 20;
-    scoreEl.textContent = score;
-    timeEl.textContent = time;
-    gameOver.style.display = "none";
-    target.style.display = "block";
-
-    randomPosition();
-
-    timer = setInterval(() => {
-        time--;
-        timeEl.textContent = time;
-
-        if(time <= 0){
-            clearInterval(timer);
-            playing = false;
-            target.style.display = "none";
-            gameOver.style.display = "block";
-            gameOver.textContent = `🏁 Oyun bitdi! Sənin score-un: ${score}`;
-        }
-    },1000);
-};
-
-target.onclick = () => {
-    if(!playing) return;
-    score++;
-    scoreEl.textContent = score;
-    randomPosition();
-};
-
-function endGame(reason){
-    clearInterval(timer);
-    playing = false;
-    target.style.display = "none";
-    gameOver.style.display = "block";
-
-    if(reason === "miss"){
-        gameOver.textContent = `❌ Boş yerə kliklədin! Score: ${score}`;
-    } else {
-        gameOver.textContent = `🏁 Oyun bitdi! Score: ${score}`;
-    }
+function closePlayerSelect() {
+  document.getElementById('playerPanel').style.display = 'none';
 }
 
-startBtn.onclick = () => {
-    if(playing) return;
+function filterByPosition(pos) {
+  const buttons = document.querySelectorAll('.filter-tab');
+  buttons.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  let playersToShow = [];
+  if (pos === 'all') {
+    playersToShow = [...players.gk, ...players.def, ...players.mid, ...players.att];
+  } else {
+    playersToShow = players[pos] || [];
+  }
+  
+  renderPlayers(playersToShow);
+}
 
-    playing = true;
-    score = 0;
-    time = 20;
-    scoreEl.textContent = score;
-    timeEl.textContent = time;
-    gameOver.style.display = "none";
-    target.style.display = "block";
+function searchPlayers(query) {
+  const allPlayers = [...players.gk, ...players.def, ...players.mid, ...players.att];
+  const filtered = allPlayers.filter(p => 
+    p.name.toLowerCase().includes(query.toLowerCase())
+  );
+  renderPlayers(filtered);
+}
 
-    randomPosition();
+function renderPlayers(playerList) {
+  const list = document.getElementById('playersList');
+  list.innerHTML = playerList.map(p => `
+    <div class="player-card" onclick='selectPlayer(${JSON.stringify(p)})'>
+      <div class="name">${p.name}</div>
+      <div class="info">${getPositionLabel(p.position)}</div>
+      <div class="years">${p.years}</div>
+    </div>
+  `).join('');
+}
 
-    timer = setInterval(() => {
-        time--;
-        timeEl.textContent = time;
+function getPositionLabel(pos) {
+  const labels = {
+    gk: 'Qapıçı',
+    def: 'Müdafiəçi',
+    mid: 'Yarımmüdafiəçi',
+    att: 'Hücumçu'
+  };
+  return labels[pos] || pos;
+}
 
-        if(time <= 0){
-            endGame("time");
-        }
-    },1000);
-};
+function selectPlayer(player) {
+  selectedTeam[currentPosition] = player;
+  
+  const posElement = document.querySelector(`[onclick="openPlayerSelect('${currentPosition}')"]`);
+  posElement.classList.add('selected');
+  posElement.querySelector('.jersey').textContent = player.name.split(' ')[0].substring(0, 3).toUpperCase();
+  
+  if (!posElement.querySelector('.player-name')) {
+    const nameSpan = document.createElement('div');
+    nameSpan.className = 'player-name';
+    nameSpan.textContent = player.name;
+    posElement.appendChild(nameSpan);
+  } else {
+    posElement.querySelector('.player-name').textContent = player.name;
+  }
+  
+  closePlayerSelect();
+}
 
-target.onclick = (e) => {
-    e.stopPropagation(); // 👈 BU ÇOX VACİBDİR
-    if(!playing) return;
+function changeFormation(formation) {
+  currentFormation = formation;
+  const buttons = document.querySelectorAll('.formation-selector button');
+  buttons.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  alert(`${formation} formasiyası seçildi! (Bu funksiya inkişaf mərhələsindədir)`);
+}
 
-    score++;
-    scoreEl.textContent = score;
-    randomPosition();
-};
+function resetTeam() {
+  if (confirm('Bütün seçimləri sıfırlamaq istədiyinizdən əminsiniz?')) {
+    selectedTeam = {};
+    document.querySelectorAll('.position').forEach(pos => {
+      pos.classList.remove('selected');
+      const nameEl = pos.querySelector('.player-name');
+      if (nameEl) nameEl.remove();
+      const jersey = pos.querySelector('.jersey');
+      jersey.textContent = jersey.parentElement.querySelector('span').textContent.includes('Qapıçı') ? '1' : 
+                           jersey.parentElement.querySelector('span').textContent.includes('Hücum') ? '9' : '10';
+    });
+  }
+}
 
-area.onclick = () => {
-    if(!playing) return;
-    endGame("miss"); // 👈 BOŞ YERƏ KLIK = GAME OVER
-};
+function shareTeam() {
+  const teamCount = Object.keys(selectedTeam).length;
+  if (teamCount < 11) {
+    alert(`Zəhmət olmasa bütün mövqeləri doldurun! (${teamCount}/11 seçildi)`);
+    return;
+  }
+  
+  let teamText = '⚽ Mənim Qarabağ FK Ən Yaxşı 11-im:\n\n';
+  Object.entries(selectedTeam).forEach(([pos, player]) => {
+    teamText += `${player.name} (${player.years})\n`;
+  });
+  
+  navigator.clipboard.writeText(teamText).then(() => {
+    alert('✅ Komanda panoya kopyalandı! İndi paylaşa bilərsiniz.');
+  }).catch(() => {
+    alert(teamText);
+  });
+}
 
+// İlkin yükləmə
+filterByPosition('all');
 </script>
 
 </body>
